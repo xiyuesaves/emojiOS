@@ -9,28 +9,29 @@
         },
         "title": "名称",
         "floderList": [
-        {
-            "type": "text",
-            "icon": "\ud83d\udcc3",
-            "title": "hello",
-            "iconPosition":
             {
-                "x": 0,
-                "y": 2
+                "type": "text",
+                "icon": "\ud83d\udcc3",
+                "title": "hello",
+                "iconPosition":
+                {
+                    "x": 0,
+                    "y": 2
+                },
+                "content": "hello world"
             },
-            "content": "hello world"
-        },
-        {
-            "type": "text",
-            "icon": "\ud83d\udcc3",
-            "title": "hi",
-            "iconPosition":
             {
-                "x": 0,
-                "y": 3
-            },
-            "content": "hahahaha"
-        }]
+                "type": "text",
+                "icon": "\ud83d\udcc3",
+                "title": "hi",
+                "iconPosition":
+                {
+                    "x": 0,
+                    "y": 3
+                },
+                "content": "hahahaha"
+            }
+        ]
     },
     {
         "type": "image",
@@ -45,23 +46,12 @@
         "src": "http://127.0.0.1:3399/static/css/bgi.jpg"
     },
     {
-        "type": "program",
-        "icon": "\ud83c\udfbc",
-        "iconPosition":
-        {
-            "x": 0,
-            "y": 2
-        },
-        "title": "音乐",
-        "src": ""
-    },
-    {
         "type": "text",
         "icon": "\ud83d\udcc3",
         "iconPosition":
         {
             "x": 0,
-            "y": 4
+            "y": 2
         },
         "title": "这是一串文本",
         "content": "这是一个文本内容"

@@ -24,7 +24,7 @@ const desktopFile = class {
             isMax: false,
             create: false
         }
-        this.only = data.only || false
+        this.only = false
         this.programEl = null
         this.showOnDesktop()
     }
@@ -233,7 +233,44 @@ const desktopFile = class {
         let moveTop = document.querySelector(".desktop").offsetHeight - document.querySelector(".task-list").offsetHeight
         moveTop = moveTop / 2 - this.windowOption.height / 2
         let moveLeft = document.querySelector(".desktop").offsetWidth / 2 - this.windowOption.width / 2 - offsetRect.left
+        // 修改实例变量
+        this.windowOption.position.x = moveLeft
+        this.windowOption.position.y = -moveTop
         this.programEl.style.transform = `translateX(${moveLeft}px) translateY(-${moveTop}px)`
+    }
+
+    // 销毁窗口
+    destroy() {
+        this.programEl.parentNode.className += " destroy"
+        let programElArr = document.querySelectorAll(".program")
+        let isAfter = false
+        for (let i = 0; i < programElArr.length; i++) {
+            let iconWidth = programElArr[i].offsetWidth
+            if (isAfter && programElArr[i].querySelector(".folder-list").style.transform) {
+                let selectEl = programElArr[i].querySelector(".folder-list")
+                let tranX = parseInt(selectEl.style.transform.match(/-?\d+(\.[\d]+)?/g)[0])
+                let tranY = parseInt(selectEl.style.transform.match(/-?\d+(\.[\d]+)?/g)[1])
+                // selectEl.style.transition = "0ms"
+                selectEl.style.transform = `translateX(${tranX + iconWidth}px) translateY(${tranY}px)`
+                setTimeout(function() {
+                    selectEl.style.transition = "200ms"
+                })
+            } else {
+                let otherInstance = getInstance(programElArr[i].querySelector(".folder-list").getAttribute("data-program-uuid"))
+                otherInstance.windowOption.position.x += iconWidth
+            }
+            if (programElArr[i] === this.programEl.parentNode) {
+                isAfter = true
+            }
+        }
+        setTimeout(() => {
+            this.programEl.parentNode.remove()
+            this.activeProgram()
+            this.programEl = null
+            this.windowOption.isOpen = false
+            this.windowOption.isMax = false
+            this.windowOption.create = false
+        }, 200)
     }
 
     // 激活图标
@@ -256,7 +293,7 @@ const desktopFile = class {
         let programList = document.querySelectorAll(".program")
         let nextProgram = { style: { zIndex: 0 } }
         for (let i = 0; i < programList.length; i++) {
-            if (programList[i].querySelector(".folder-list.act") && programList[i].style.zIndex > nextProgram.style.zIndex) {
+            if (programList[i].querySelector(".folder-list.act") && programList[i].style.zIndex > nextProgram.style.zIndex && !programList[i].className.includes("destroy")) {
                 nextProgram = programList[i]
             }
         }

@@ -4,8 +4,11 @@ body {
     box-sizing: border-box;
     font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "STHeitiSC-Light", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     background-color: #fafafa;
+    overflow: hidden;
 }
-
+#gtx-trans{
+    display: none!important;
+}
 * {
     box-sizing: border-box;
     outline: none;

@@ -27,8 +27,6 @@ function taskbar() {
         }
     })
 
-    // 全局程序层级
-    let zIndexVal = 0
     // 任务栏点击事件
     taskList.addEventListener("click", function(e) {
         // 窗口按钮事件
@@ -42,6 +40,11 @@ function taskbar() {
             if (e.path[i].className === "max") {
                 let programEl = e.path[i].offsetParent
                 getInstance(programEl.getAttribute("data-program-uuid")).switchMax()
+                break
+            }
+            if (e.path[i].className === "close") {
+                let programEl = e.path[i].offsetParent
+                getInstance(programEl.getAttribute("data-program-uuid")).destroy()
                 break
             }
         }
