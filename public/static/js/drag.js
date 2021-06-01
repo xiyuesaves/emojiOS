@@ -31,8 +31,8 @@ function drag() {
             let moveX = 0
             let moveY = 0
             if (drop.parentNode.style.transform) {
-                moveX = parseInt(drop.parentNode.style.transform.match(/-?\d+/g)[0])
-                moveY = parseInt(drop.parentNode.style.transform.match(/-?\d+/g)[1])
+                moveX = parseInt(drop.parentNode.style.transform.match(/-?\d+(\.[\d]+)?/g)[0])
+                moveY = parseInt(drop.parentNode.style.transform.match(/-?\d+(\.[\d]+)?/g)[1])
             }
             let elPosition = drop.parentNode.getBoundingClientRect()
             let offsetBottom = document.querySelector(".room-list").offsetHeight - elPosition.height - document.querySelector(".taskbar").offsetHeight

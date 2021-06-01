@@ -167,6 +167,7 @@ const desktopFile = class {
                 let styleText = `width: ${this.windowOption.width}px; height: ${this.windowOption.height}px; top: -${this.windowOption.height}px; transition: all 200ms ease 0s; transform: translateX(${this.windowOption.position.x}px) translateY(${this.windowOption.position.y}px);`
                 this.programEl.setAttribute("style", styleText)
                 this.programEl.className = "folder-list act"
+                this.center()
                 // 置顶窗口
                 this.topProrame()
             }, )
@@ -204,10 +205,10 @@ const desktopFile = class {
         }
     }
 
+    // 最大化
     maxWindow() {
-        let offsetRect
         console.log("最大化窗口", this.programEl.style.transform)
-        offsetRect = this.programEl.getBoundingClientRect()
+        let offsetRect = this.programEl.getBoundingClientRect()
         this.windowOption.isMax = true
         if (!this.windowOption.isOpen) {
             this.windowOption.isOpen = true
@@ -224,6 +225,15 @@ const desktopFile = class {
         }
         // 置顶窗口
         this.topProrame()
+    }
+
+    // 居中窗口
+    center() {
+        let offsetRect = this.programEl.getBoundingClientRect()
+        let moveTop = document.querySelector(".desktop").offsetHeight - document.querySelector(".task-list").offsetHeight
+        moveTop = moveTop / 2 - this.windowOption.height / 2
+        let moveLeft = document.querySelector(".desktop").offsetWidth / 2 - this.windowOption.width / 2 - offsetRect.left
+        this.programEl.style.transform = `translateX(${moveLeft}px) translateY(-${moveTop}px)`
     }
 
     // 激活图标
